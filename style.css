@@ -90,3 +90,28 @@ select {
   transform: scale(20);
   transition: transform 1s ease;
 }
+
+/* Biến mất và xuất hiện tuần tự */
+.fade-text {
+  color: white;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  margin-top: 20px;
+  max-width: 80%;
+  text-align: center;
+}
+
+.fade-text.show {
+  opacity: 1;
+}
+
+/* Toàn màn hình zoom-out */
+.blackout.zoom-out {
+  animation: fullZoom 1s ease forwards;
+}
+
+@keyframes fullZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(2.5); opacity: 0; }
+}
