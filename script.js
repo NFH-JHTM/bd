@@ -2,6 +2,7 @@ const day = document.getElementById("day");
 const month = document.getElementById("month");
 const blackout = document.getElementById("blackout");
 const flash = document.getElementById("flash");
+const cutsceneText = document.getElementById("cutscene-text");
 
 const texts = [
   "Nơi này... từng là nơi chúng ta cười đùa.",
@@ -17,9 +18,7 @@ const texts = [
 
 let triggered = false;
 let flashClickable = false;
-let currentText = null;
 
-// Tạo dropdown ngày/tháng
 for (let i = 1; i <= 31; i++) {
   const opt = document.createElement("option");
   opt.value = i;
@@ -33,63 +32,57 @@ for (let i = 1; i <= 12; i++) {
   month.appendChild(opt);
 }
 
-// Hàm hiển thị lời thoại theo từng mốc thời gian
-function showText(content, delay) {
+function showText(content, delay, showFlash = false) {
   setTimeout(() => {
-    if (currentText) currentText.remove();
+    cutsceneText.classList.remove("show");
+    cutsceneText.classList.add("hide");
 
-    const newText = document.createElement("div");
-    newText.className = "fade-text show";
-    newText.textContent = content;
-    blackout.appendChild(newText);
-    currentText = newText;
+    setTimeout(() => {
+      cutsceneText.textContent = content;
+      cutsceneText.classList.remove("hide");
+      cutsceneText.classList.add("show");
+
+      if (showFlash) {
+        flash.classList.add("show");
+      }
+    }, 1500);
   }, delay);
 }
 
-// Kiểm tra ngày sinh
 function checkBirthday() {
   if (triggered) return;
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
     triggered = true;
     day.disabled = true;
     month.disabled = true;
+
     blackout.classList.add("show");
 
-    // Chuỗi thoại bí ẩn - điện ảnh
     showText(texts[0], 2000);
     showText(texts[1], 6000);
-    showText(texts[2], 9500);
-    showText(texts[3], 13000);
-    showText(texts[4], 16500);
+    showText(texts[2], 10000);
+    showText(texts[3], 14000);
+    showText(texts[4], 18000);
+    showText(texts[5], 22000);
+    showText(texts[6], 26000); // "Nhưng có thể giữ lại..."
+    showText(texts[7], 30500, true); // Flash xuất hiện sau
+    showText(texts[8], 34500);
 
-    // Hiện đốm sáng lấp lánh
-    setTimeout(() => {
-      flash.classList.add("show");
-    }, 20000);
-
-    // Các dòng sau ánh sáng
-    showText(texts[5], 21500);
-    showText(texts[6], 24500);
-    showText(texts[7], 27500);
-    showText(texts[8], 30500);
-
-    // Cho phép click sau 32s
     setTimeout(() => {
       flashClickable = true;
-    }, 32000);
+    }, 35500);
   }
 }
 
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
 
-// Khi click đốm sáng
 flash.addEventListener("click", () => {
   if (!flashClickable) return;
 
   flash.classList.add("zoom-fullscreen");
 
   setTimeout(() => {
-    window.location.href = "next.html"; // 👉 thay bằng link bro muốn
-  }, 1200);
+    window.location.href = "next.html";
+  }, 1300);
 });
