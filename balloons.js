@@ -10,8 +10,11 @@ resizeBalloonCanvas();
 window.addEventListener("resize", resizeBalloonCanvas);
 
 function createBalloon() {
-  if (balloons.length >= 40) return; // tăng giới hạn cho đầy đủ màn
-  const x = Math.random() * balloonCanvas.width;
+  const canvasWidth = balloonCanvas.width;
+
+  if (balloons.length >= 50) return;
+  
+  const x = Math.random() * canvasWidth; // ⚠️ Đảm bảo lấy theo kích thước canvas mới nhất
   const color = `hsl(${Math.random() * 360}, 70%, 80%)`;
   balloons.push({
     x,
@@ -19,7 +22,7 @@ function createBalloon() {
     radius: Math.random() * 10 + 20,
     speed: Math.random() * 1 + 0.5,
     color,
-    life: 15000 // sống lâu hơn để bay hết màn
+    life: 15000
   });
 }
 
@@ -28,7 +31,10 @@ function drawBalloons() {
   balloons.forEach((b, i) => {
     b.y -= b.speed;
     b.life -= 16;
-    if (b.life <= 0 || b.y + b.radius < 0) balloons.splice(i, 1);
+    if (b.life <= 0 || b.y + b.radius < 0) {
+      balloons.splice(i, 1);
+      return;
+    }
 
     // Dây
     bCtx.beginPath();
@@ -46,7 +52,7 @@ function drawBalloons() {
 }
 
 function animateBalloons() {
-  if (Math.random() < 0.05) createBalloon(); // tần suất cao hơn
+  if (Math.random() < 0.05) createBalloon();
   drawBalloons();
   requestAnimationFrame(animateBalloons);
 }
