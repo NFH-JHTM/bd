@@ -103,10 +103,6 @@ select {
   to { box-shadow: 0 0 30px #ffea00; }
 }
 
-.flash.zoom {
-  transform: scale(20);
-  transition: transform 1s ease;
-}
 
 /* Text mượt & chậm */
 .fade-text {
