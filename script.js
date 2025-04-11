@@ -19,21 +19,11 @@ const texts = [
 
 let triggered = false;
 let flashClickable = false;
-let audioStarted = false;
+let canPlayMusic = false;
 
-function playMusic() {
-  audio.volume = 0.4;
-  audio.play().catch((e) => {
-    console.warn("Autoplay bị chặn.");
-  });
-}
-
-// Kích hoạt phát nhạc khi user click lần đầu
+// Cho phép phát nhạc sau khi user click bất kỳ
 window.addEventListener("click", () => {
-  if (!audioStarted) {
-    playMusic();
-    audioStarted = true;
-  }
+  canPlayMusic = true;
 });
 
 // Tạo dropdown ngày/tháng
@@ -50,7 +40,14 @@ for (let i = 1; i <= 12; i++) {
   month.appendChild(opt);
 }
 
-// Show từng đoạn cutscene
+function playMusicAfterBlackout() {
+  if (!canPlayMusic) return;
+  audio.volume = 0.4;
+  audio.play().catch(() => {
+    console.warn("Autoplay vẫn bị chặn.");
+  });
+}
+
 function showText(content, delay, showFlash = false) {
   setTimeout(() => {
     cutsceneText.classList.remove("show");
@@ -76,6 +73,9 @@ function checkBirthday() {
     month.disabled = true;
 
     blackout.classList.add("show");
+
+    // Chỉ phát nhạc khi blackout hiện lên
+    playMusicAfterBlackout();
 
     showText(texts[0], 2000);
     showText(texts[1], 6000);
