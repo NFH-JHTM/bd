@@ -7,14 +7,13 @@ const flash = document.getElementById("flash");
 
 let triggered = false;
 
-// Tạo dropdown
+// Dropdown
 for (let i = 1; i <= 31; i++) {
   const opt = document.createElement("option");
   opt.value = i;
   opt.textContent = i;
   day.appendChild(opt);
 }
-
 for (let i = 1; i <= 12; i++) {
   const opt = document.createElement("option");
   opt.value = i;
@@ -26,41 +25,41 @@ function checkBirthday() {
   if (triggered) return;
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
     triggered = true;
+
     day.disabled = true;
     month.disabled = true;
-
     blackout.classList.add("show");
 
-    // Text 1 hiện
+    // Text 1 hiện sau 2s
     setTimeout(() => {
       text1.classList.add("show");
-    }, 1500);
+    }, 2000);
 
-    // Text 1 ẩn
+    // Text 1 ẩn sau 5.5s
     setTimeout(() => {
       text1.classList.remove("show");
-    }, 3500);
+    }, 5500);
 
-    // Flash hiện
+    // Flash hiện sau 6.5s
     setTimeout(() => {
       flash.classList.add("show");
-    }, 4000);
+    }, 6500);
 
-    // Text 2 hiện
+    // Text 2 hiện tại vị trí cũ sau 8s
     setTimeout(() => {
       text2.classList.add("show");
-    }, 5000);
+    }, 8000);
   }
 }
 
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
 
-// Flash click → toàn màn hình zoom → chuyển trang
+// Click flash => toàn màn hình zoom và chuyển trang
 flash.addEventListener("click", () => {
-  blackout.classList.add("zoom-out");
+  flash.classList.add("zoom-fullscreen");
 
   setTimeout(() => {
-    window.location.href = "next.html"; // đổi nếu muốn
-  }, 1000);
+    window.location.href = "next.html"; // 👈 chỉnh link nếu cần
+  }, 1200);
 });
