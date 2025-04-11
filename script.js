@@ -7,6 +7,22 @@ const flash = document.getElementById("flash");
 
 let triggered = false;
 
+// 👉 Tạo dropdown ngày
+for (let i = 1; i <= 31; i++) {
+  const opt = document.createElement("option");
+  opt.value = i;
+  opt.textContent = i;
+  day.appendChild(opt);
+}
+
+// 👉 Tạo dropdown tháng
+for (let i = 1; i <= 12; i++) {
+  const opt = document.createElement("option");
+  opt.value = i;
+  opt.textContent = `Tháng ${i}`;
+  month.appendChild(opt);
+}
+
 function checkBirthday() {
   if (triggered) return;
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
@@ -38,25 +54,10 @@ function checkBirthday() {
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
 
-// Flash click to zoom + redirect
+// 👉 Flash click → zoom & chuyển trang
 flash.addEventListener("click", () => {
   flash.classList.add("zoom");
   setTimeout(() => {
-    window.location.href = "next.html"; // 👉 đổi link ở đây nếu cần
+    window.location.href = "next.html"; // 👉 đổi link tại đây nếu muốn
   }, 1000);
-  // Tạo dropdown ngày
-for (let i = 1; i <= 31; i++) {
-  const opt = document.createElement("option");
-  opt.value = i;
-  opt.textContent = i;
-  day.appendChild(opt);
-}
-
-// Tạo dropdown tháng
-for (let i = 1; i <= 12; i++) {
-  const opt = document.createElement("option");
-  opt.value = i;
-  opt.textContent = `Tháng ${i}`;
-  month.appendChild(opt);
-}
 });
