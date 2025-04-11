@@ -74,11 +74,28 @@ select {
   transform: scale(0.5);
   box-shadow: 0 0 30px 10px #fffbcc;
   transition: opacity 1s ease, transform 0.5s ease;
+  z-index: 1001;
 }
 
 .flash.show {
   opacity: 1;
   animation: glow 1.5s infinite alternate;
+}
+
+/* Toàn màn hình zoom từ đốm sáng */
+.flash.zoom-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: unset;
+  right: unset;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  transform: scale(1);
+  background: radial-gradient(circle, #fff, #ffeb3b);
+  box-shadow: 0 0 500px 200px #fff59d;
+  transition: all 1s ease;
 }
 
 @keyframes glow {
@@ -91,27 +108,20 @@ select {
   transition: transform 1s ease;
 }
 
-/* Biến mất và xuất hiện tuần tự */
+/* Text mượt & chậm */
 .fade-text {
   color: white;
   font-size: 24px;
   opacity: 0;
-  transition: opacity 1s ease;
-  margin-top: 20px;
+  transition: opacity 1.5s ease;
   max-width: 80%;
   text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .fade-text.show {
   opacity: 1;
-}
-
-/* Toàn màn hình zoom-out */
-.blackout.zoom-out {
-  animation: fullZoom 1s ease forwards;
-}
-
-@keyframes fullZoom {
-  0% { transform: scale(1); }
-  100% { transform: scale(2.5); opacity: 0; }
 }
