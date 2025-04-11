@@ -3,28 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sinh nhật của bạn là?</title>
+  <title>Troll Birthday</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="panel">
-    <h2>Ngày sinh nhật của bạn là ngày bao nhiêu?</h2>
-    <select id="day">
-      <option value="">Chọn ngày</option>
-      <!-- Tạo các option ngày bằng JS -->
-    </select>
-    <select id="month">
-      <option value="">Chọn tháng</option>
-      <!-- Tạo các option tháng bằng JS -->
-    </select>
-
-    <div class="fade-text" id="text1">ủa ai tắt đèn mất tiêu rồi ?!?!?</div>
-    <div class="bulb" id="bulb">💡</div>
-    <div class="pull-string" id="pull">Kéo dây để bật đèn lại</div>
+  <div class="container">
+    <h1>Ngày sinh nhật của bạn là ngày bao nhiêu?</h1>
+    <div class="dropdowns">
+      <select id="daySelect"></select>
+      <select id="monthSelect"></select>
+    </div>
   </div>
 
-  <audio id="click-sound" src="click.mp3" preload="auto"></audio>
+  <div class="overlay-dark" id="overlay"></div>
+
+  <div class="text" id="text1">ủa ai tắt đèn mất tiêu rồi ?!?!?</div>
+
+  <div class="bulb-container" id="bulb-container">
+    <div class="cord"></div>
+    <div class="bulb-body"></div>
+  </div>
+
+  <div id="pull" class="pull-text">Kéo xuống để bật đèn</div>
+
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
   <script src="script.js"></script>
 </body>
