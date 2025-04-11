@@ -1,10 +1,10 @@
+/* ========== Base Setup ========== */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #ffe8ec, #d5f4ff);
-  color: #333;
-  transition: background 1s;
+  transition: background 1s ease;
 }
 
 .container {
@@ -31,10 +31,12 @@ select {
   background-color: #fff8fc;
 }
 
+/* ========== Blackout Scene ========== */
 .blackout {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 100vw;
+  height: 100vh;
   background-color: black;
   z-index: 999;
   display: none;
@@ -47,56 +49,7 @@ select {
   display: flex;
 }
 
-.fade-text {
-  color: white;
-  font-size: 24px;
-  opacity: 0;
-  transition: opacity 1.5s ease;
-  margin-top: 20px;
-  max-width: 80%;
-  text-align: center;
-}
-
-.fade-text.show {
-  opacity: 1;
-}
-
-.flash {
-  width: 60px;
-  height: 60px;
-  background: radial-gradient(circle, #fff, #ffd700);
-  border-radius: 50%;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  opacity: 0;
-  cursor: pointer;
-  transform: scale(0.5);
-  box-shadow: 0 0 30px 10px #fffbcc;
-  transition: opacity 1s ease, transform 0.5s ease;
-  z-index: 1001;
-}
-
-.flash.show {
-  opacity: 1;
-  animation: glow 1.5s infinite alternate;
-}
-
-/* Toàn màn hình zoom từ đốm sáng */
-.flash.zoom-fullscreen {
-  transform: scale(50);
-  transition: transform 1.2s ease, opacity 0.5s ease;
-  opacity: 0;
-  transform-origin: bottom right; /* 👈 Quan trọng: zoom từ vị trí đốm sáng */
-}
-
-@keyframes glow {
-  from { box-shadow: 0 0 10px #fffacd; }
-  to { box-shadow: 0 0 30px #ffea00; }
-}
-
-
-/* Text mượt & chậm */
+/* ========== Fade Text ========== */
 .fade-text {
   color: white;
   font-size: 24px;
@@ -108,8 +61,58 @@ select {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .fade-text.show {
   opacity: 1;
+}
+
+/* ========== Sparkling Flash Light ========== */
+.flash {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #fff, #ffd700);
+  border-radius: 50%;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  box-shadow: 0 0 30px 10px #fffbcc;
+  cursor: pointer;
+  z-index: 1001;
+  animation: twinkle 2s infinite ease-in-out alternate;
+}
+
+.flash.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes twinkle {
+  0% {
+    box-shadow: 0 0 15px #fff59d, 0 0 30px #fff176;
+    filter: brightness(1);
+  }
+  100% {
+    box-shadow: 0 0 25px #fffacd, 0 0 60px #ffeb3b;
+    filter: brightness(1.3);
+  }
+}
+
+/* ========== Zoom Fullscreen When Click ========== */
+.flash.zoom-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  transform: scale(1);
+  background: radial-gradient(circle at center, #fffde7, #fff176, #ffd600);
+  box-shadow: 0 0 300px 100px #fff59d;
+  transition: all 1.2s ease;
+  animation: none; /* Tắt twinkle khi bung sáng */
 }
