@@ -44,4 +44,19 @@ flash.addEventListener("click", () => {
   setTimeout(() => {
     window.location.href = "next.html"; // 👉 đổi link ở đây nếu cần
   }, 1000);
+  // Tạo dropdown ngày
+for (let i = 1; i <= 31; i++) {
+  const opt = document.createElement("option");
+  opt.value = i;
+  opt.textContent = i;
+  day.appendChild(opt);
+}
+
+// Tạo dropdown tháng
+for (let i = 1; i <= 12; i++) {
+  const opt = document.createElement("option");
+  opt.value = i;
+  opt.textContent = `Tháng ${i}`;
+  month.appendChild(opt);
+}
 });
