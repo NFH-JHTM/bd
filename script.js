@@ -1,56 +1,47 @@
-let triggered = false;
-const daySelect = document.getElementById("day");
-const monthSelect = document.getElementById("month");
-const overlay = document.getElementById("overlay");
+const day = document.getElementById("day");
+const month = document.getElementById("month");
+const blackout = document.getElementById("blackout");
 const text1 = document.getElementById("text1");
-const bulbContainer = document.getElementById("bulb-container");
-const pull = document.getElementById("pull");
+const text2 = document.getElementById("text2");
+const flash = document.getElementById("flash");
 
-// Check ngày sinh
+let triggered = false;
+
 function checkBirthday() {
   if (triggered) return;
-
-  const day = parseInt(daySelect.value);
-  const month = parseInt(monthSelect.value);
-
-  if (day === 13 && month === 4) {
+  if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
     triggered = true;
 
-    // Khoá chọn ngày tháng
-    daySelect.disabled = true;
-    monthSelect.disabled = true;
+    day.disabled = true;
+    month.disabled = true;
 
-    // Làm đen màn hình
-    overlay.classList.add("show");
+    // Show blackout
+    blackout.classList.add("show");
 
-    // Hiện text sau 1.5s
+    // Text 1
     setTimeout(() => {
-      text1.style.display = "block";
+      text1.classList.add("show");
     }, 1500);
 
-    // Hiện bóng đèn sau 4.5s
+    // Flash appear
     setTimeout(() => {
-      bulbContainer.style.display = "block";
-    }, 4500);
+      flash.classList.add("show");
+    }, 3500);
 
-    // Hiện dây kéo sau 6s
+    // Text 2
     setTimeout(() => {
-      pull.classList.add("show");
-    }, 6000);
+      text2.classList.add("show");
+    }, 5000);
   }
 }
 
-// Kéo dây đèn
-pull.addEventListener("click", () => {
-  const clickSound = document.getElementById("click-sound");
-  clickSound.play();
+day.addEventListener("change", checkBirthday);
+month.addEventListener("change", checkBirthday);
 
-  // Fade out overlay
-  overlay.classList.remove("show");
-  overlay.classList.add("fade-out");
-
-  // Chuyển tab hoặc trang khác
+// Flash click to zoom + redirect
+flash.addEventListener("click", () => {
+  flash.classList.add("zoom");
   setTimeout(() => {
-    window.location.href = "your-next-page.html"; // thay bằng link thật
-  }, 2000);
+    window.location.href = "next.html"; // 👉 đổi link ở đây nếu cần
+  }, 1000);
 });
