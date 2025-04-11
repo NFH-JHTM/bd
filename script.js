@@ -1,13 +1,25 @@
 const day = document.getElementById("day");
 const month = document.getElementById("month");
 const blackout = document.getElementById("blackout");
-const text1 = document.getElementById("text1");
-const text2 = document.getElementById("text2");
 const flash = document.getElementById("flash");
 
-let triggered = false;
+const texts = [
+  "Nơi này... từng là nơi chúng ta cười đùa.",
+  "Một thời gian tưởng như chẳng bao giờ trôi qua.",
+  "Nhưng kỷ niệm... cũng có ngày tàn.",
+  "Không ai rời đi... chỉ là mọi thứ dừng lại.",
+  "Và rồi... nơi này chìm vào tĩnh lặng.",
+  "Chúng ta không thể quay lại...",
+  "Nhưng có thể giữ lại một phần nhỏ...",
+  "Một ánh sáng... của điều từng là đẹp nhất.",
+  "Bạn có muốn chạm vào ký ức đó không?"
+];
 
-// Dropdown
+let triggered = false;
+let flashClickable = false;
+let currentText = null;
+
+// Tạo dropdown ngày/tháng
 for (let i = 1; i <= 31; i++) {
   const opt = document.createElement("option");
   opt.value = i;
@@ -21,45 +33,62 @@ for (let i = 1; i <= 12; i++) {
   month.appendChild(opt);
 }
 
+// Hàm hiển thị text từng dòng một
+function showText(content, delay) {
+  setTimeout(() => {
+    if (currentText) currentText.remove();
+
+    const newText = document.createElement("div");
+    newText.className = "fade-text show";
+    newText.textContent = content;
+    blackout.appendChild(newText);
+    currentText = newText;
+  }, delay);
+}
+
 function checkBirthday() {
   if (triggered) return;
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
     triggered = true;
-
     day.disabled = true;
     month.disabled = true;
     blackout.classList.add("show");
 
-    // Text 1 hiện sau 2s
-    setTimeout(() => {
-      text1.classList.add("show");
-    }, 2000);
+    // Chuỗi lời thoại kỷ niệm
+    showText(texts[0], 2000);
+    showText(texts[1], 6000);
+    showText(texts[2], 9500);
+    showText(texts[3], 13000);
+    showText(texts[4], 16500);
 
-    // Text 1 ẩn sau 5.5s
-    setTimeout(() => {
-      text1.classList.remove("show");
-    }, 5500);
-
-    // Flash hiện sau 6.5s
+    // Hiện đốm sáng
     setTimeout(() => {
       flash.classList.add("show");
-    }, 6500);
+    }, 20000);
 
-    // Text 2 hiện tại vị trí cũ sau 8s
+    // Các lời thoại sau khi thấy ánh sáng
+    showText(texts[5], 21500);
+    showText(texts[6], 24500);
+    showText(texts[7], 27500);
+    showText(texts[8], 30500);
+
+    // Cho click ánh sáng
     setTimeout(() => {
-      text2.classList.add("show");
-    }, 8000);
+      flashClickable = true;
+    }, 32000);
   }
 }
 
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
 
-// Click flash => toàn màn hình zoom và chuyển trang
+// Click đốm sáng → zoom toàn màn hình → chuyển tab
 flash.addEventListener("click", () => {
+  if (!flashClickable) return;
+
   flash.classList.add("zoom-fullscreen");
 
   setTimeout(() => {
-    window.location.href = "next.html"; // 👈 chỉnh link nếu cần
+    window.location.href = "next.html"; // 👉 đổi nếu muốn
   }, 1200);
 });
