@@ -7,7 +7,7 @@ const flash = document.getElementById("flash");
 
 let triggered = false;
 
-// 👉 Tạo dropdown ngày
+// Tạo dropdown
 for (let i = 1; i <= 31; i++) {
   const opt = document.createElement("option");
   opt.value = i;
@@ -15,7 +15,6 @@ for (let i = 1; i <= 31; i++) {
   day.appendChild(opt);
 }
 
-// 👉 Tạo dropdown tháng
 for (let i = 1; i <= 12; i++) {
   const opt = document.createElement("option");
   opt.value = i;
@@ -27,24 +26,27 @@ function checkBirthday() {
   if (triggered) return;
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
     triggered = true;
-
     day.disabled = true;
     month.disabled = true;
 
-    // Show blackout
     blackout.classList.add("show");
 
-    // Text 1
+    // Text 1 hiện
     setTimeout(() => {
       text1.classList.add("show");
     }, 1500);
 
-    // Flash appear
+    // Text 1 ẩn
     setTimeout(() => {
-      flash.classList.add("show");
+      text1.classList.remove("show");
     }, 3500);
 
-    // Text 2
+    // Flash hiện
+    setTimeout(() => {
+      flash.classList.add("show");
+    }, 4000);
+
+    // Text 2 hiện
     setTimeout(() => {
       text2.classList.add("show");
     }, 5000);
@@ -54,10 +56,11 @@ function checkBirthday() {
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
 
-// 👉 Flash click → zoom & chuyển trang
+// Flash click → toàn màn hình zoom → chuyển trang
 flash.addEventListener("click", () => {
-  flash.classList.add("zoom");
+  blackout.classList.add("zoom-out");
+
   setTimeout(() => {
-    window.location.href = "next.html"; // 👉 đổi link tại đây nếu muốn
+    window.location.href = "next.html"; // đổi nếu muốn
   }, 1000);
 });
