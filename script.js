@@ -1,33 +1,12 @@
-const daySelect = document.getElementById('daySelect');
-const monthSelect = document.getElementById('monthSelect');
-const text1 = document.getElementById('text1');
-const pull = document.getElementById('pull');
-const overlay = document.getElementById('overlay');
-const clickSound = document.getElementById('clickSound');
-
 let triggered = false;
+const daySelect = document.getElementById("day");
+const monthSelect = document.getElementById("month");
+const overlay = document.getElementById("overlay");
+const text1 = document.getElementById("text1");
+const bulbContainer = document.getElementById("bulb-container");
+const pull = document.getElementById("pull");
 
-// Populate dropdowns
-for (let d = 1; d <= 31; d++) {
-  let opt = document.createElement("option");
-  opt.value = d;
-  opt.text = d;
-  daySelect.appendChild(opt);
-}
-
-const months = [
-  "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
-  "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
-];
-
-months.forEach((m, i) => {
-  let opt = document.createElement("option");
-  opt.value = i + 1;
-  opt.text = m;
-  monthSelect.appendChild(opt);
-});
-
-// Event
+// Check ngày sinh
 function checkBirthday() {
   if (triggered) return;
 
@@ -36,32 +15,42 @@ function checkBirthday() {
 
   if (day === 13 && month === 4) {
     triggered = true;
+
+    // Khoá chọn ngày tháng
     daySelect.disabled = true;
     monthSelect.disabled = true;
 
+    // Làm đen màn hình
     overlay.classList.add("show");
 
+    // Hiện text sau 1.5s
     setTimeout(() => {
-      text1.classList.add("show");
+      text1.style.display = "block";
     }, 1500);
 
+    // Hiện bóng đèn sau 4.5s
     setTimeout(() => {
-      document.getElementById("bulb-container").classList.add("show");
-    }, 4000);
+      bulbContainer.style.display = "block";
+    }, 4500);
 
+    // Hiện dây kéo sau 6s
     setTimeout(() => {
       pull.classList.add("show");
-    }, 5500);
+    }, 6000);
   }
 }
 
-daySelect.addEventListener("change", checkBirthday);
-monthSelect.addEventListener("change", checkBirthday);
-
-// Click to switch tab
+// Kéo dây đèn
 pull.addEventListener("click", () => {
+  const clickSound = document.getElementById("click-sound");
   clickSound.play();
+
+  // Fade out overlay
+  overlay.classList.remove("show");
+  overlay.classList.add("fade-out");
+
+  // Chuyển tab hoặc trang khác
   setTimeout(() => {
-    window.location.href = "surprise.html"; // tab khác
-  }, 1000);
+    window.location.href = "your-next-page.html"; // thay bằng link thật
+  }, 2000);
 });
