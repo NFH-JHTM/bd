@@ -1,8 +1,7 @@
-/* ========== Base Setup ========== */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins';
+  font-family: 'Quicksand', sans-serif;
   background: linear-gradient(135deg, #ffe8ec, #d5f4ff);
   transition: background 1s ease;
 }
@@ -15,11 +14,6 @@ body {
 h1 {
   font-size: 2rem;
   color: #ff4d6d;
-  text-shadow: 1px 1px #fff;
-}
-
-.dropdowns {
-  margin-top: 20px;
 }
 
 select {
@@ -31,44 +25,57 @@ select {
   background-color: #fff8fc;
 }
 
-/* ========== Blackout Scene ========== */
+/* Blackout + Stars + Cutscene */
 .blackout {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100vw; height: 100vh;
   background-color: black;
   z-index: 999;
   display: none;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  overflow: hidden;
 }
 
 .blackout.show {
   display: flex;
+  position: fixed;
 }
 
-/* ========== Fade Text ========== */
-.fade-text {
-  color: white;
-  font-size: 24px;
-  opacity: 0;
-  transition: opacity 1.5s ease;
-  max-width: 80%;
-  text-align: center;
+/* Stars */
+#stars {
   position: absolute;
-  top: 40%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Fade text */
+.fade-text {
+  font-family: 'Itim', cursive;
+  color: white;
+  font-size: 22px;
+  opacity: 0;
+  position: absolute;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none;
+  text-align: center;
+  transition: opacity 1.5s ease;
+  z-index: 2;
 }
 
 .fade-text.show {
   opacity: 1;
 }
 
-/* ========== Sparkling Flash Light ========== */
+.fade-text.hide {
+  opacity: 0;
+}
+
+/* Flash */
 .flash {
   width: 60px;
   height: 60px;
@@ -79,10 +86,10 @@ select {
   right: 30px;
   opacity: 0;
   transform: scale(0.7);
-  transition: opacity 1.5s ease, transform 1.5s ease;
+  transition: opacity 2s ease, transform 1.5s ease;
   box-shadow: 0 0 30px 10px #fffbcc;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 3;
   animation: twinkle 2s infinite ease-in-out alternate;
 }
 
@@ -91,28 +98,22 @@ select {
   transform: scale(1);
 }
 
-@keyframes twinkle {
-  0% {
-    box-shadow: 0 0 15px #fff59d, 0 0 30px #fff176;
-    filter: brightness(1);
-  }
-  100% {
-    box-shadow: 0 0 25px #fffacd, 0 0 60px #ffeb3b;
-    filter: brightness(1.3);
-  }
-}
-
-/* ========== Zoom Fullscreen When Click ========== */
 .flash.zoom-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: 100vh;
+  top: 0;
+  left: 0;
+  right: unset;
+  bottom: unset;
   border-radius: 0;
   transform: scale(1);
   background: radial-gradient(circle at center, #fffde7, #fff176, #ffd600);
   box-shadow: 0 0 300px 100px #fff59d;
   transition: all 1.2s ease;
-  animation: none; /* Tắt twinkle khi bung sáng */
+  animation: none;
+}
+
+@keyframes twinkle {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.3); }
 }
