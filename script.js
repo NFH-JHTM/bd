@@ -16,6 +16,15 @@ const texts = [
   "Bạn có muốn chạm vào ký ức đó không?"
 ];
 
+const audio = document.getElementById("bgm");
+
+function playMusic() {
+  audio.volume = 0.4;
+  audio.play().catch((e) => {
+    console.warn("Autoplay bị chặn, sẽ phát sau khi user tương tác.");
+  });
+}
+
 let triggered = false;
 let flashClickable = false;
 
@@ -57,6 +66,8 @@ function checkBirthday() {
     month.disabled = true;
 
     blackout.classList.add("show");
+    playMusic();
+
 
     showText(texts[0], 2000);
     showText(texts[1], 6000);
