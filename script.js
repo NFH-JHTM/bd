@@ -3,6 +3,7 @@ const month = document.getElementById("month");
 const blackout = document.getElementById("blackout");
 const flash = document.getElementById("flash");
 const cutsceneText = document.getElementById("cutscene-text");
+const audio = document.getElementById("bgm");
 
 const texts = [
   "Nơi này... từng là nơi chúng ta cười đùa.",
@@ -16,18 +17,26 @@ const texts = [
   "Bạn có muốn chạm vào ký ức đó không?"
 ];
 
-const audio = document.getElementById("bgm");
+let triggered = false;
+let flashClickable = false;
+let audioStarted = false;
 
 function playMusic() {
   audio.volume = 0.4;
   audio.play().catch((e) => {
-    console.warn("Autoplay bị chặn, sẽ phát sau khi user tương tác.");
+    console.warn("Autoplay bị chặn.");
   });
 }
 
-let triggered = false;
-let flashClickable = false;
+// Kích hoạt phát nhạc khi user click lần đầu
+window.addEventListener("click", () => {
+  if (!audioStarted) {
+    playMusic();
+    audioStarted = true;
+  }
+});
 
+// Tạo dropdown ngày/tháng
 for (let i = 1; i <= 31; i++) {
   const opt = document.createElement("option");
   opt.value = i;
@@ -41,6 +50,7 @@ for (let i = 1; i <= 12; i++) {
   month.appendChild(opt);
 }
 
+// Show từng đoạn cutscene
 function showText(content, delay, showFlash = false) {
   setTimeout(() => {
     cutsceneText.classList.remove("show");
@@ -66,8 +76,6 @@ function checkBirthday() {
     month.disabled = true;
 
     blackout.classList.add("show");
-    playMusic();
-
 
     showText(texts[0], 2000);
     showText(texts[1], 6000);
@@ -75,8 +83,8 @@ function checkBirthday() {
     showText(texts[3], 14000);
     showText(texts[4], 18000);
     showText(texts[5], 22000);
-    showText(texts[6], 26000); // "Nhưng có thể giữ lại..."
-    showText(texts[7], 30500, true); // Flash xuất hiện sau
+    showText(texts[6], 26000);
+    showText(texts[7], 30500, true);
     showText(texts[8], 34500);
 
     setTimeout(() => {
