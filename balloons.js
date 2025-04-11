@@ -10,16 +10,16 @@ resizeBalloonCanvas();
 window.addEventListener("resize", resizeBalloonCanvas);
 
 function createBalloon() {
-  if (balloons.length >= 20) return;
+  if (balloons.length >= 40) return; // tăng giới hạn cho đầy đủ màn
   const x = Math.random() * balloonCanvas.width;
   const color = `hsl(${Math.random() * 360}, 70%, 80%)`;
   balloons.push({
     x,
-    y: balloonCanvas.height + 20,
-    radius: Math.random() * 10 + 15,
-    speed: Math.random() * 0.5 + 0.5,
+    y: balloonCanvas.height + 30,
+    radius: Math.random() * 10 + 20,
+    speed: Math.random() * 1 + 0.5,
     color,
-    life: 8000
+    life: 15000 // sống lâu hơn để bay hết màn
   });
 }
 
@@ -28,12 +28,12 @@ function drawBalloons() {
   balloons.forEach((b, i) => {
     b.y -= b.speed;
     b.life -= 16;
-    if (b.life <= 0) balloons.splice(i, 1);
+    if (b.life <= 0 || b.y + b.radius < 0) balloons.splice(i, 1);
 
     // Dây
     bCtx.beginPath();
     bCtx.moveTo(b.x, b.y + b.radius);
-    bCtx.lineTo(b.x, b.y + b.radius + 15);
+    bCtx.lineTo(b.x, b.y + b.radius + 20);
     bCtx.strokeStyle = "#aaa";
     bCtx.stroke();
 
@@ -46,7 +46,7 @@ function drawBalloons() {
 }
 
 function animateBalloons() {
-  if (Math.random() < 0.02) createBalloon();
+  if (Math.random() < 0.05) createBalloon(); // tần suất cao hơn
   drawBalloons();
   requestAnimationFrame(animateBalloons);
 }
