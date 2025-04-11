@@ -3,28 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ngày sinh nhật của bạn</title>
+  <title>Kết thúc một kỷ niệm</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Itim&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <h1>🎂 Ngày sinh nhật của bạn là ngày bao nhiêu?</h1>
     <div class="dropdowns">
-      <select id="day">
-  <!-- Option sẽ được thêm bằng JS -->
-</select>
-<select id="month">
-  <!-- Option sẽ được thêm bằng JS -->
-</select>
+      <select id="day"></select>
+      <select id="month"></select>
     </div>
   </div>
 
-  <div class="blackout" id="blackout">
-    <div class="fade-text" id="text1">Ủa... cái gì vừa xảy ra vậy???</div>
-    <div class="flash" id="flash"></div>
-    <div class="fade-text" id="text2">Cái gì kìa ta... bạn thử nhấn vào xem?</div>
+  <div id="blackout" class="blackout">
+    <canvas id="stars"></canvas>
+    <div id="flash" class="flash"></div>
   </div>
 
   <script src="script.js"></script>
+  <script src="stars.js"></script>
 </body>
 </html>
