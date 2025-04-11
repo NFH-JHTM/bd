@@ -4,83 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sinh nhật của bạn là?</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background-color: #fdfdfd;
-      color: #222;
-      transition: background-color 1s, color 1s;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .panel {
-      text-align: center;
-      padding: 20px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    select {
-      margin: 10px;
-      padding: 8px 16px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-
-    .fade-text, .bulb, .pull-string {
-      display: none;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .fade-text.show, .bulb.show, .pull-string.show {
-      display: block;
-      opacity: 1;
-    }
-
-    .bulb {
-      font-size: 80px;
-      margin-top: 20px;
-      animation: swing 1s ease-in-out infinite alternate;
-    }
-
-    @keyframes swing {
-      0% { transform: rotate(-10deg); }
-      100% { transform: rotate(10deg); }
-    }
-
-    .pull-string {
-      margin-top: 10px;
-      cursor: pointer;
-      font-size: 20px;
-      text-decoration: underline;
-    }
-
-    .dark-mode {
-      background-color: #000;
-      color: #fff;
-    }
-  </style>
 </head>
 <body>
   <div class="panel">
     <h2>Ngày sinh nhật của bạn là ngày bao nhiêu?</h2>
     <select id="day">
       <option value="">Chọn ngày</option>
-      ${[...Array(31)].map((_, i) => `<option value="${i+1}">${i+1}</option>`).join("")}
+      <!-- Tạo các option ngày bằng JS -->
     </select>
     <select id="month">
       <option value="">Chọn tháng</option>
-      ${[...Array(12)].map((_, i) => `<option value="${i+1}">Tháng ${i+1}</option>`).join("")}
+      <!-- Tạo các option tháng bằng JS -->
     </select>
 
     <div class="fade-text" id="text1">ủa ai tắt đèn mất tiêu rồi ?!?!?</div>
@@ -88,50 +24,8 @@
     <div class="pull-string" id="pull">Kéo dây để bật đèn lại</div>
   </div>
 
-  <!-- 🔊 Âm thanh -->
   <audio id="click-sound" src="click.mp3" preload="auto"></audio>
 
-  <script>
-    const daySelect = document.getElementById('day');
-    const monthSelect = document.getElementById('month');
-    const text1 = document.getElementById('text1');
-    const bulb = document.getElementById('bulb');
-    const pull = document.getElementById('pull');
-    let triggered = false;
-
-    function checkDate() {
-      const day = parseInt(daySelect.value);
-      const month = parseInt(monthSelect.value);
-      
-      if (day === 13 && month === 4 && !triggered) {
-        triggered = true;
-        document.body.classList.add('dark-mode');
-        
-        setTimeout(() => {
-          text1.classList.add('show');
-        }, 1500);
-
-        setTimeout(() => {
-          bulb.classList.add('show');
-        }, 4000);
-
-        setTimeout(() => {
-          pull.classList.add('show');
-        }, 5500);
-      }
-    }
-
-    daySelect.addEventListener('change', checkDate);
-    monthSelect.addEventListener('change', checkDate);
-
-    pull.addEventListener('click', () => {
-      const clickSound = document.getElementById('click-sound');
-      clickSound.play();
-
-      setTimeout(() => {
-        window.location.href = "next.html";
-      }, 500); // Đợi 0.5s rồi mới redirect
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
