@@ -1,21 +1,21 @@
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
-let particles = [];
+const fireworksCanvas = document.getElementById("fireworks");
+const fCtx = fireworksCanvas.getContext("2d");
+let fireworks = [];
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+function resizeFireworksCanvas() {
+  fireworksCanvas.width = window.innerWidth;
+  fireworksCanvas.height = window.innerHeight;
 }
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+resizeFireworksCanvas();
+window.addEventListener("resize", resizeFireworksCanvas);
 
 function createFirework() {
-  const x = Math.random() * canvas.width;
-  const y = canvas.height;
+  const x = Math.random() * fireworksCanvas.width;
+  const y = fireworksCanvas.height;
   const color = `hsl(${Math.random() * 360}, 100%, 70%)`;
 
   for (let i = 0; i < 50; i++) {
-    particles.push({
+    fireworks.push({
       x: x,
       y: y,
       vx: (Math.random() - 0.5) * 4,
@@ -27,24 +27,24 @@ function createFirework() {
   }
 }
 
-function updateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach((p, i) => {
+function updateFireworks() {
+  fCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+  fireworks.forEach((p, i) => {
     p.x += p.vx;
     p.y += p.vy;
     p.alpha -= 0.015;
-    if (p.alpha <= 0) particles.splice(i, 1);
+    if (p.alpha <= 0) fireworks.splice(i, 1);
 
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fillStyle = p.color.replace('70%', `${p.alpha * 100}%`);
-    ctx.fill();
+    fCtx.beginPath();
+    fCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    fCtx.fillStyle = p.color.replace('70%', `${p.alpha * 100}%`);
+    fCtx.fill();
   });
 }
 
-function animate() {
-  if (Math.random() < 0.03) createFirework(); // tốc độ bắn
-  updateParticles();
-  requestAnimationFrame(animate);
+function animateFireworks() {
+  if (Math.random() < 0.03) createFirework();
+  updateFireworks();
+  requestAnimationFrame(animateFireworks);
 }
-animate();
+animateFireworks();
