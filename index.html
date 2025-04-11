@@ -3,31 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Troll Birthday</title>
+  <title>Ngày sinh nhật của bạn</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>🎉 Ngày sinh nhật của bạn là ngày bao nhiêu? 🎂</h1>
+    <h1>🎂 Ngày sinh nhật của bạn là ngày bao nhiêu?</h1>
     <div class="dropdowns">
-      <select id="daySelect"></select>
-      <select id="monthSelect"></select>
+      <select id="day">
+        <option value="">Ngày</option>
+        ${Array.from({ length: 31 }, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join('')}
+      </select>
+      <select id="month">
+        <option value="">Tháng</option>
+        ${Array.from({ length: 12 }, (_, i) => `<option value="${i + 1}">Tháng ${i + 1}</option>`).join('')}
+      </select>
     </div>
   </div>
 
-  <div class="overlay-dark" id="overlay"></div>
-
-  <div class="text" id="text1">ủa ai tắt đèn mất tiêu rồi ?!?!?</div>
-
-  <div class="bulb-container" id="bulb-container">
-    <div class="cord"></div>
-    <div class="bulb-body"></div>
+  <div class="blackout" id="blackout">
+    <div class="fade-text" id="text1">Ủa... cái gì vừa xảy ra vậy???</div>
+    <div class="flash" id="flash"></div>
+    <div class="fade-text" id="text2">Cái gì kìa ta... bạn thử nhấn vào xem?</div>
   </div>
-
-  <div id="pull" class="pull-text">🔦 Kéo xuống để bật đèn</div>
-
-  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
   <script src="script.js"></script>
 </body>
