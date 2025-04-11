@@ -109,20 +109,26 @@ select {
 }
 
 .flash.zoom-fullscreen {
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  border-radius: 0;
+  width: 2000px;
+  height: 2000px;
   transform: scale(1);
   background: radial-gradient(circle at center, #fffde7, #fff176, #ffd600);
   box-shadow: 0 0 300px 100px #fff59d;
   transition: all 1.2s ease;
   animation: none;
-  transform-origin: bottom right;
+  transform-origin: center center;
+  z-index: 1002;
 }
 
+
 @keyframes twinkle {
-  0% { filter: brightness(1); }
-  100% { filter: brightness(1.4); }
+  0% {
+    box-shadow: 0 0 15px #fff59d, 0 0 30px #fff176;
+    filter: brightness(1);
+  }
+  100% {
+    box-shadow: 0 0 30px #fffac0, 0 0 60px #ffeb3b;
+    filter: brightness(1.4);
+  }
 }
+
