@@ -84,18 +84,10 @@ select {
 
 /* Toàn màn hình zoom từ đốm sáng */
 .flash.zoom-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: unset;
-  right: unset;
-  width: 100vw;
-  height: 100vh;
-  border-radius: 0;
-  transform: scale(1);
-  background: radial-gradient(circle, #fff, #ffeb3b);
-  box-shadow: 0 0 500px 200px #fff59d;
-  transition: all 1s ease;
+  transform: scale(50);
+  transition: transform 1.2s ease, opacity 0.5s ease;
+  opacity: 0;
+  transform-origin: bottom right; /* 👈 Quan trọng: zoom từ vị trí đốm sáng */
 }
 
 @keyframes glow {
