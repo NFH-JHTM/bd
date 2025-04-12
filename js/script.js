@@ -25,7 +25,7 @@ let canPlayMusic = false;
 // 🔓 Unlock autoplay khi user click bất kỳ lần đầu
 window.addEventListener("click", () => {
   if (!audioReady) {
-    audio.load(); // preload để không bị block
+    audio.load();
     audioReady = true;
   }
   canPlayMusic = true;
@@ -45,7 +45,7 @@ for (let i = 1; i <= 12; i++) {
   month.appendChild(opt);
 }
 
-// Hiện từng đoạn thoại + flash nếu cần
+// Hiện từng đoạn thoại
 function showText(content, delay, showFlash = false) {
   setTimeout(() => {
     cutsceneText.classList.remove("show");
@@ -63,7 +63,7 @@ function showText(content, delay, showFlash = false) {
   }, delay);
 }
 
-// Kiểm tra sinh nhật
+// Check đúng ngày sinh
 function checkBirthday() {
   if (triggered) return;
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
@@ -73,7 +73,7 @@ function checkBirthday() {
 
     blackout.classList.add("show");
 
-    // 🎵 Phát nhạc sau blackout 0.5s
+    // 🎵 Nhạc phát sau blackout
     setTimeout(() => {
       if (audioReady && canPlayMusic) {
         audio.volume = 0.4;
@@ -83,29 +83,32 @@ function checkBirthday() {
       }
     }, 500);
 
-    // Cutscene sequence
+    // 🕰️ Cutscene dài hơn
     showText(texts[0], 2000);
-    showText(texts[1], 6000);
-    showText(texts[2], 10000);
-    showText(texts[3], 14000);
-    showText(texts[4], 18000);
-    showText(texts[5], 22000);
-    showText(texts[6], 26000);
-    showText(texts[7], 30500, true);
-    showText(texts[8], 34500);
+    showText(texts[1], 7000);
+    showText(texts[2], 12000);
+    showText(texts[3], 17000);
+    showText(texts[4], 22000);
+    showText(texts[5], 27000);
+    showText(texts[6], 32000);
+    showText(texts[7], 38000, true);
+    showText(texts[8], 43000);
 
     setTimeout(() => {
       flashClickable = true;
-    }, 35500);
+    }, 44000);
   }
 }
 
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
 
-// Flash click → chuyển tab
+// 🌟 Khi nhấn đốm sáng → zoom + tắt nhạc + chuyển tab
 flash.addEventListener("click", () => {
   if (!flashClickable) return;
+
+  audio.pause();
+  audio.currentTime = 0;
 
   flash.classList.add("zoom-fullscreen");
 
