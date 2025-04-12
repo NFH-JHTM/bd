@@ -14,7 +14,7 @@ const texts = [
   "Chúng ta không thể quay lại...",
   "Nhưng có thể giữ lại một phần nhỏ...",
   "Một ánh sáng... của điều từng là đẹp nhất.",
-  "Bạn có muốn chạm vào ký ức đó không?"
+  "Bạn có muốn chạm vào nó?"
 ];
 
 let triggered = false;
