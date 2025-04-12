@@ -91,29 +91,15 @@ function showText(content, delay, showFlash = false) {
   }, delay);
 }
 
+// 🎂 Check sinh nhật
 function checkBirthday() {
-  if (triggered) return; // Ngừng nếu đã được kích hoạt
-
+  if (triggered) return;
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
     triggered = true;
     day.disabled = true;
     month.disabled = true;
 
-    // Tắt nhạc nếu có
-    if (!bgm2.paused) {
-      bgm2.pause();
-      bgm2.currentTime = 0;
-    }
-
-    // Hiển thị blackout
     blackout.classList.add("show");
-
-    // Chạy đoạn cắt cảnh
-    runCutscene(); // Đảm bảo rằng function này chạy sau khi sự kiện này xảy ra.
-  }
-}
-
-
 
     // 🎵 Phát nhạc
     setTimeout(() => {
@@ -154,33 +140,4 @@ flash.addEventListener("click", () => {
   setTimeout(() => {
     window.location.href = "https://www.roblox.com/games/103960960602294/Untitled-Game";
   }, 1300);
-});
-
-const preloader = document.getElementById("preloader");
-const loadingText = document.querySelector(".loading-text");
-const continueText = document.querySelector(".continue-text");
-const bgm2 = document.getElementById("bgm2");
-
-window.addEventListener("load", () => {
-  // Sau 2.5s loading xong
-  setTimeout(() => {
-    loadingText.style.display = "none";
-    continueText.style.display = "block";
-
-    // Chờ user bấm phím bất kỳ
-    window.addEventListener("keydown", () => {
-      preloader.classList.add("hide");
-
-      // Phát nhạc khi vào trang
-      setTimeout(() => {
-        try {
-          bgm2.volume = 0.4;
-          bgm2.play();
-        } catch (e) {
-          console.warn("Autoplay bị chặn!", e);
-        }
-        preloader.remove();
-      }, 1500); // delay nhẹ sau mở cửa
-    }, { once: true });
-  }, 2500); // thời gian loading giả
 });
