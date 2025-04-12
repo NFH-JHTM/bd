@@ -44,25 +44,25 @@ function drawBalloons() {
       return;
     }
 
-    // Dây uốn éo
-    const waveLength = 20;
-    const waveHeight = 4;
-    const steps = 10;
+   // Dây uốn éo dài hơn
+const waveLength = 60; // tổng chiều dài dây
+const waveHeight = 5;  // độ uốn
+const steps = 20;      // càng nhiều bước càng mượt
 
-    bCtx.beginPath();
-    for (let j = 0; j <= steps; j++) {
-      const progress = j / steps;
-      const dx = Math.sin(progress * Math.PI * 2 + performance.now() / 500 + i) * waveHeight;
-      const dy = progress * waveLength;
-      const px = b.x + dx;
-      const py = b.y + b.radius + dy;
-      if (j === 0) bCtx.moveTo(px, py);
-      else bCtx.lineTo(px, py);
-    }
+bCtx.beginPath();
+for (let j = 0; j <= steps; j++) {
+  const progress = j / steps;
+  const dx = Math.sin(progress * Math.PI * 2 + performance.now() / 600 + i) * waveHeight;
+  const dy = progress * waveLength;
+  const px = b.x + dx;
+  const py = b.y + b.radius + dy;
+  if (j === 0) bCtx.moveTo(px, py);
+  else bCtx.lineTo(px, py);
+}
 
-    bCtx.strokeStyle = `rgba(170, 170, 170, ${b.alpha})`;
-    bCtx.lineWidth = 1;
-    bCtx.stroke();
+bCtx.strokeStyle = `rgba(170, 170, 170, ${b.alpha})`;
+bCtx.lineWidth = 1;
+bCtx.stroke();
 
     // Bóng
     bCtx.beginPath();
