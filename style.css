@@ -176,11 +176,13 @@ select {
   box-shadow: 0 2px 6px rgba(255, 182, 193, 0.3);
 }
 
-/* Bóng bay */
 #balloons {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none;
   z-index: 4;
+  pointer-events: none;
+  display: block; 
 }
