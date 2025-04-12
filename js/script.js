@@ -91,7 +91,6 @@ function showText(content, delay, showFlash = false) {
   }, delay);
 }
 
-// 🎂 Check sinh nhật
 function checkBirthday() {
   if (triggered) return;
 
@@ -108,10 +107,6 @@ function checkBirthday() {
 
     blackout.classList.add("show");
 
-    // Cutscene logic ở đây...
-  }
-}
-
     // 🎵 Phát nhạc
     setTimeout(() => {
       if (audioReady && canPlayMusic) {
@@ -122,7 +117,7 @@ function checkBirthday() {
       }
     }, 500);
 
-    // Cutscene chill dài hơn
+    // 🎬 Cutscene chill dài hơn
     showText(texts[0], 2000);
     showText(texts[1], 8000);
     showText(texts[2], 14000);
@@ -134,6 +129,7 @@ function checkBirthday() {
     showText(texts[8], 51000);
   }
 }
+
 
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
