@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Playfair Display', serif;
-  background: url('backgroundprofile.webp') no-repeat center center fixed;
+  background: url('images/backgroundprofile.webp') no-repeat center center fixed;
   background-size: cover;
   transition: background 1s ease;
 }
