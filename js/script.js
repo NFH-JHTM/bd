@@ -91,15 +91,25 @@ function showText(content, delay, showFlash = false) {
   }, delay);
 }
 
-// 🎂 Check sinh nhật
 function checkBirthday() {
   if (triggered) return;
+
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
     triggered = true;
     day.disabled = true;
     month.disabled = true;
 
+    // 🔇 Tắt nhạc khi vào cutscene
+    if (!bgm2.paused) {
+      bgm2.pause();
+      bgm2.currentTime = 0;
+    }
+
     blackout.classList.add("show");
+
+  }
+}
+
 
     // 🎵 Phát nhạc
     setTimeout(() => {
