@@ -189,22 +189,53 @@ select {
   display: block; 
 }
 
+.gate {
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  height: 100%;
+  background: linear-gradient(to bottom, #ffd6e0, #ffc0cb);
+  z-index: 2;
+  transition: transform 2s ease;
+}
+
+.left-gate {
+  left: 0;
+  transform: translateX(0%);
+}
+
+.right-gate {
+  right: 0;
+  transform: translateX(0%);
+}
+
+.gates-open .left-gate {
+  transform: translateX(-100%);
+}
+
+.gates-open .right-gate {
+  transform: translateX(100%);
+}
+
 #preloader {
   position: fixed;
   z-index: 2000;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   background: #fff5fb;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   font-family: 'Itim', cursive;
   transition: opacity 1.5s ease;
 }
 
 .loader-content {
+  position: absolute;
+  z-index: 3;
   text-align: center;
   animation: popUp 1s ease-in-out infinite alternate;
 }
@@ -212,6 +243,13 @@ select {
 .loader-content .cake {
   font-size: 3rem;
   animation: bounce 0.8s infinite alternate;
+}
+
+.loader-content p {
+  font-size: 1.4rem;
+  margin-top: 10px;
+  color: #ff6b81;
+  text-shadow: 0 0 5px #fff;
 }
 
 @keyframes bounce {
@@ -228,6 +266,7 @@ select {
   opacity: 0;
   pointer-events: none;
 }
+
 * {
   user-select: none; 
 }
