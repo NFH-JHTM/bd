@@ -19,10 +19,15 @@ const texts = [
 
 let triggered = false;
 let flashClickable = false;
+let audioReady = false;
 let canPlayMusic = false;
 
-// Cho phép phát nhạc sau khi user click bất kỳ
+// 🔓 Unlock autoplay khi user click bất kỳ lần đầu
 window.addEventListener("click", () => {
+  if (!audioReady) {
+    audio.load(); // preload để không bị block
+    audioReady = true;
+  }
   canPlayMusic = true;
 });
 
@@ -40,14 +45,7 @@ for (let i = 1; i <= 12; i++) {
   month.appendChild(opt);
 }
 
-function playMusicAfterBlackout() {
-  if (!canPlayMusic) return;
-  audio.volume = 0.4;
-  audio.play().catch(() => {
-    console.warn("Autoplay vẫn bị chặn.");
-  });
-}
-
+// Hiện từng đoạn thoại + flash nếu cần
 function showText(content, delay, showFlash = false) {
   setTimeout(() => {
     cutsceneText.classList.remove("show");
@@ -65,6 +63,7 @@ function showText(content, delay, showFlash = false) {
   }, delay);
 }
 
+// Kiểm tra sinh nhật
 function checkBirthday() {
   if (triggered) return;
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
@@ -74,9 +73,17 @@ function checkBirthday() {
 
     blackout.classList.add("show");
 
-    // Chỉ phát nhạc khi blackout hiện lên
-    playMusicAfterBlackout();
+    // 🎵 Phát nhạc sau blackout 0.5s
+    setTimeout(() => {
+      if (audioReady && canPlayMusic) {
+        audio.volume = 0.4;
+        audio.play().catch((e) => {
+          console.warn("Autoplay bị chặn sau blackout", e);
+        });
+      }
+    }, 500);
 
+    // Cutscene sequence
     showText(texts[0], 2000);
     showText(texts[1], 6000);
     showText(texts[2], 10000);
@@ -96,6 +103,7 @@ function checkBirthday() {
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
 
+// Flash click → chuyển tab
 flash.addEventListener("click", () => {
   if (!flashClickable) return;
 
