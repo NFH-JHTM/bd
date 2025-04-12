@@ -188,3 +188,6 @@ select {
   pointer-events: none;
   display: block; 
 }
+
+* {
+  user-select: none; 
