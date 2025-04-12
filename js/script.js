@@ -138,6 +138,6 @@ flash.addEventListener("click", () => {
   flash.classList.add("zoom-fullscreen");
 
   setTimeout(() => {
-    window.location.href = "../next/index.html";
+    window.location.href = "./next/index.html";
   }, 1300);
 });
