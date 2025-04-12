@@ -22,7 +22,7 @@ let flashClickable = false;
 let audioReady = false;
 let canPlayMusic = false;
 
-// 🔓 Unlock autoplay khi user tương tác lần đầu
+// 🔓 Unlock autoplay nhạc khi user tương tác
 window.addEventListener("click", () => {
   if (!audioReady) {
     audio.load();
@@ -31,7 +31,7 @@ window.addEventListener("click", () => {
   canPlayMusic = true;
 });
 
-// Tạo dropdown ngày/tháng
+// Tạo dropdown
 for (let i = 1; i <= 31; i++) {
   const opt = document.createElement("option");
   opt.value = i;
@@ -45,31 +45,32 @@ for (let i = 1; i <= 12; i++) {
   month.appendChild(opt);
 }
 
-// Cutscene từng đoạn, có hiệu ứng bay màu
-function showText(content, delay, showFlash = false, isLast = false) {
+// 🎬 Hiển thị text với hiệu ứng "bay màu"
+function showText(content, delay, showFlash = false) {
   setTimeout(() => {
-    // Bay màu từng ký tự
-    const chars = cutsceneText.textContent.split("");
-    cutsceneText.innerHTML = "";
-    chars.forEach((char, index) => {
-      const span = document.createElement("span");
-      span.textContent = char;
-      span.classList.add("char-out");
+    const oldText = cutsceneText.textContent.trim();
 
-      // Random hiệu ứng bay
-      span.style.setProperty("--x", `${Math.random() * 60 - 30}px`);
-      span.style.setProperty("--y", `${-60 - Math.random() * 40}px`);
-      span.style.setProperty("--r", `${Math.random()}turn`);
+    if (oldText.length > 0) {
+      // 🔥 Bay màu từng ký tự
+      const chars = oldText.split("");
+      cutsceneText.innerHTML = "";
+      chars.forEach((char, index) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.classList.add("char-out");
 
-      span.style.animationDelay = `${index * 20}ms`;
-      cutsceneText.appendChild(span);
-    });
+        span.style.setProperty("--x", `${Math.random() * 60 - 30}px`);
+        span.style.setProperty("--y", `${-60 - Math.random() * 40}px`);
+        span.style.setProperty("--r", `${Math.random()}turn`);
+        span.style.animationDelay = `${index * 20}ms`;
+        cutsceneText.appendChild(span);
+      });
 
-    cutsceneText.classList.remove("show");
-    cutsceneText.classList.add("hide");
+      cutsceneText.classList.remove("show");
+      cutsceneText.classList.add("hide");
+    }
 
     setTimeout(() => {
-      // Hiện text mới
       cutsceneText.innerHTML = content
         .split("")
         .map(char => `<span class="char-in">${char}</span>`)
@@ -81,16 +82,16 @@ function showText(content, delay, showFlash = false, isLast = false) {
       if (showFlash) {
         flash.classList.add("show");
 
-        // Chờ thêm 2s sau khi text hiện mới cho click đốm sáng
+        // ⏱️ Cho phép click flash sau 2s
         setTimeout(() => {
           flashClickable = true;
         }, 2000);
       }
-    }, 1400);
+    }, oldText.length > 0 ? 1500 : 0);
   }, delay);
 }
 
-// Kiểm tra sinh nhật
+// 🎂 Check sinh nhật
 function checkBirthday() {
   if (triggered) return;
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
@@ -100,15 +101,17 @@ function checkBirthday() {
 
     blackout.classList.add("show");
 
-    // 🎵 Nhạc bắt đầu
+    // 🎵 Phát nhạc
     setTimeout(() => {
       if (audioReady && canPlayMusic) {
         audio.volume = 0.4;
-        audio.play().catch(e => console.warn("Autoplay chặn", e));
+        audio.play().catch((e) => {
+          console.warn("Autoplay bị chặn", e);
+        });
       }
     }, 500);
 
-    // 🎬 Cutscene kéo dài hơn
+    // Cutscene chill dài hơn
     showText(texts[0], 2000);
     showText(texts[1], 8000);
     showText(texts[2], 14000);
@@ -124,10 +127,11 @@ function checkBirthday() {
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
 
-// Click đốm sáng → zoom + tắt nhạc + chuyển tab
+// ⭐ Flash click
 flash.addEventListener("click", () => {
   if (!flashClickable) return;
 
+  // Tắt nhạc
   audio.pause();
   audio.currentTime = 0;
 
