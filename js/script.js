@@ -138,6 +138,6 @@ flash.addEventListener("click", () => {
   flash.classList.add("zoom-fullscreen");
 
   setTimeout(() => {
-    window.location.href = "https://nfh-jhtm.github.io/bd/next/index.html";
+    window.location.href = "https://www.roblox.com/games/103960960602294/Untitled-Game";
   }, 1300);
 });
