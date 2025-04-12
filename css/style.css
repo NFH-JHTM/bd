@@ -189,6 +189,45 @@ select {
   display: block; 
 }
 
+#preloader {
+  position: fixed;
+  z-index: 2000;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff5fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Itim', cursive;
+  transition: opacity 1.5s ease;
+}
+
+.loader-content {
+  text-align: center;
+  animation: popUp 1s ease-in-out infinite alternate;
+}
+
+.loader-content .cake {
+  font-size: 3rem;
+  animation: bounce 0.8s infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+
+@keyframes popUp {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+#preloader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
 * {
   user-select: none; 
 }
