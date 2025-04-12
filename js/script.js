@@ -92,23 +92,27 @@ function showText(content, delay, showFlash = false) {
 }
 
 function checkBirthday() {
-  if (triggered) return;
+  if (triggered) return; // Ngừng nếu đã được kích hoạt
 
   if (parseInt(day.value) === 13 && parseInt(month.value) === 4) {
     triggered = true;
     day.disabled = true;
     month.disabled = true;
 
-    // 🔇 Tắt nhạc khi vào cutscene
+    // Tắt nhạc nếu có
     if (!bgm2.paused) {
       bgm2.pause();
       bgm2.currentTime = 0;
     }
 
+    // Hiển thị blackout
     blackout.classList.add("show");
 
+    // Chạy đoạn cắt cảnh
+    runCutscene(); // Đảm bảo rằng function này chạy sau khi sự kiện này xảy ra.
   }
 }
+
 
 
     // 🎵 Phát nhạc
