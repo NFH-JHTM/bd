@@ -1,4 +1,3 @@
-/* Base Styles */
 body {
   margin: 0;
   padding: 0;
@@ -6,65 +5,33 @@ body {
   background: url('../images/backgroundprofile.webp') no-repeat center center fixed;
   background-size: cover;
   transition: background 1s ease;
-  overflow-x: hidden;
 }
 
-/* Container & Birthday Panel */
 .container {
   text-align: center;
-  padding-top: 30vh;
+  padding-top: 20vh;
 }
 
-.birthday-panel {
-  display: inline-block;
-  padding: 30px 20px;
-  margin-top: 20px;
-  border-radius: 20px;
-  background: rgba(255, 248, 252, 0.85);
-  box-shadow: 0 0 20px rgba(255, 192, 203, 0.3);
-  border: 2px solid #ffe6ea;
-  backdrop-filter: blur(4px);
-}
-
-.dropdowns {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Text Elements */
 h1 {
   font-size: 2rem;
   color: #ff4d6d;
   text-shadow: 0 0 5px #fff1f5, 0 0 10px #ffc0cb;
-  margin-bottom: 20px;
 }
 
-/* Form Elements */
 select {
   padding: 10px;
   font-size: 1rem;
   border-radius: 10px;
   border: 2px solid #ffb6c1;
   margin: 10px;
-  background-color: #fffafc;
-  box-shadow: 0 2px 6px rgba(255, 182, 193, 0.3);
-  transition: all 0.3s ease;
+  background-color: #fff8fc;
 }
 
-select:focus {
-  outline: none;
-  box-shadow: 0 0 10px #ffb6c1;
-}
-
-/* Blackout & Stars */
+/* Blackout + Stars */
 .blackout {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
   background-color: black;
   z-index: 999;
   display: none;
@@ -78,6 +45,15 @@ select:focus {
 .blackout.show {
   display: flex;
   opacity: 1;
+}
+
+.fade-in {
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 #stars {
@@ -99,10 +75,8 @@ select:focus {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  transition: opacity 1s ease;
+  transition: opacity 2s ease;
   z-index: 2;
-  width: 80%;
-  max-width: 800px;
 }
 
 .fade-text.show {
@@ -113,19 +87,7 @@ select:focus {
   opacity: 0;
 }
 
-/* Character Animation Classes */
-.char-out {
-  display: inline-block;
-  animation: flyOut 1s forwards;
-}
-
-.char-in {
-  display: inline-block;
-  animation: flyIn 0.8s forwards;
-  opacity: 0;
-}
-
-/* Flash Element */
+/* Flash */
 .flash {
   width: 60px;
   height: 60px;
@@ -136,7 +98,7 @@ select:focus {
   right: 30px;
   opacity: 0;
   transform: scale(0.7);
-  transition: opacity 1.5s ease, transform 1.5s ease;
+  transition: opacity 2s ease, transform 1.5s ease;
   box-shadow: 0 0 30px 10px #fffbcc;
   cursor: pointer;
   z-index: 3;
@@ -149,47 +111,20 @@ select:focus {
   transform: scale(1);
 }
 
-.flash.pulse {
-  animation: twinkle 1s infinite ease-in-out alternate, pulse 1.5s infinite;
-}
-
 .flash.zoom-fullscreen {
   width: 2000px;
   height: 2000px;
   transform: scale(1);
   background: radial-gradient(circle at center, #fffde7, #fff176, #ffd600);
   box-shadow: 0 0 300px 100px #fff59d;
-  transition: all 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  animation: none !important;
+  transition: all 1.2s ease;
+  animation: none;
   transform-origin: bottom right;
   position: fixed;
   bottom: 30px;
   right: 30px;
-  opacity: 1;
-  border-radius: 50%;
 }
 
-/* Animations */
-@keyframes flyOut {
-  to {
-    transform: 
-      translateX(var(--x, 0)) 
-      translateY(var(--y, -60px)) 
-      rotate(var(--r, 0));
-    opacity: 0;
-  }
-}
-
-@keyframes flyIn {
-  from { 
-    transform: translateY(20px); 
-    opacity: 0; 
-  }
-  to { 
-    transform: translateY(0); 
-    opacity: 1; 
-  }
-}
 
 @keyframes twinkle {
   0% {
@@ -202,19 +137,7 @@ select:focus {
   }
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Special Effects */
-#fireworks, #balloons {
+#fireworks {
   position: fixed;
   top: 0;
   left: 0;
@@ -224,11 +147,48 @@ select:focus {
   z-index: 5;
 }
 
-#balloons {
-  z-index: 4;
+.container {
+  text-align: center;
+  padding-top: 30vh; /* Đẩy xuống */
 }
 
-/* Gate Animation */
+.birthday-panel {
+  display: inline-block;
+  padding: 30px 20px;
+  margin-top: 20px;
+  border-radius: 20px;
+  background: rgba(255, 248, 252, 0.85);
+  box-shadow: 0 0 20px rgba(255, 192, 203, 0.3);
+  border: 2px solid #ffe6ea;
+  backdrop-filter: blur(4px);
+}
+
+.dropdowns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 2px solid #ffb6c1;
+  background-color: #fffafc;
+  box-shadow: 0 2px 6px rgba(255, 182, 193, 0.3);
+}
+
+#balloons {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 4;
+  pointer-events: none;
+  display: block; 
+}
+
 .gate {
   position: absolute;
   top: 0;
@@ -257,7 +217,6 @@ select:focus {
   transform: translateX(100%);
 }
 
-/* Preloader */
 #preloader {
   position: fixed;
   z-index: 2000;
@@ -308,32 +267,6 @@ select:focus {
   pointer-events: none;
 }
 
-/* Miscellaneous */
 * {
-  user-select: none;
-  box-sizing: border-box;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .container {
-    padding-top: 20vh;
-  }
-  
-  .fade-text {
-    font-size: 22px;
-    width: 90%;
-  }
-  
-  .dropdowns {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .flash {
-    width: 50px;
-    height: 50px;
-    bottom: 20px;
-    right: 20px;
-  }
+  user-select: none; 
 }
