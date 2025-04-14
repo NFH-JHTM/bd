@@ -241,7 +241,7 @@ select {
 }
 
 .loader-content .cake {
-  font-size: 3rem;
+  font-size: 10rem;
   animation: bounce 0.8s infinite alternate;
 }
 
