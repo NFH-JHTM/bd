@@ -46,7 +46,7 @@ for (let i = 1; i <= 12; i++) {
 }
 
 // 🎬 Hiển thị text với hiệu ứng "bay màu"
-function showText(content, delay, showFlash = false) {
+unction showText(content, delay, showFlash = false) {
   setTimeout(() => {
     const oldText = cutsceneText.textContent.trim();
 
@@ -81,11 +81,12 @@ function showText(content, delay, showFlash = false) {
 
       if (showFlash) {
         flash.classList.add("show");
+        flashClickable = false; // Ensure flash is initially unclickable
 
-        // ⏱️ Cho phép click flash sau 2s
+        // ⏱️ Cho phép click flash sau 3s kể từ khi text cuối xuất hiện
         setTimeout(() => {
           flashClickable = true;
-        }, 2000);
+        }, 3000);
       }
     }, oldText.length > 0 ? 1500 : 0);
   }, delay);
