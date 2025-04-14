@@ -4,6 +4,7 @@ const blackout = document.getElementById("blackout");
 const flash = document.getElementById("flash");
 const cutsceneText = document.getElementById("cutscene-text");
 const audio = document.getElementById("bgm");
+const bgm2 = document.getElementById("bgm2"); // Added missing reference
 
 const texts = [
   "Nơi này... từng là nơi chúng ta cười đùa.",
@@ -22,7 +23,7 @@ let flashClickable = false;
 let audioReady = false;
 let canPlayMusic = false;
 
-// 🔓 Unlock autoplay nhạc khi user tương tác
+// 🔓 Unlock autoplay when user interacts
 window.addEventListener("click", () => {
   if (!audioReady) {
     audio.load();
@@ -31,7 +32,7 @@ window.addEventListener("click", () => {
   canPlayMusic = true;
 });
 
-// Tạo dropdown
+// Create dropdown menus
 for (let i = 1; i <= 31; i++) {
   const opt = document.createElement("option");
   opt.value = i;
@@ -45,13 +46,13 @@ for (let i = 1; i <= 12; i++) {
   month.appendChild(opt);
 }
 
-// 🎬 Hiển thị text với hiệu ứng "bay màu"
-unction showText(content, delay, showFlash = false) {
+// 🎬 Show text with flying effect
+function showText(content, delay, showFlash = false) {
   setTimeout(() => {
     const oldText = cutsceneText.textContent.trim();
 
     if (oldText.length > 0) {
-      // 🔥 Bay màu từng ký tự
+      // 🔥 Fly-out animation for old text
       const chars = oldText.split("");
       cutsceneText.innerHTML = "";
       chars.forEach((char, index) => {
@@ -71,6 +72,7 @@ unction showText(content, delay, showFlash = false) {
     }
 
     setTimeout(() => {
+      // ✨ Fly-in animation for new text
       cutsceneText.innerHTML = content
         .split("")
         .map(char => `<span class="char-in">${char}</span>`)
@@ -81,11 +83,12 @@ unction showText(content, delay, showFlash = false) {
 
       if (showFlash) {
         flash.classList.add("show");
-        flashClickable = false; // Ensure flash is initially unclickable
+        flashClickable = false;
 
-        // ⏱️ Cho phép click flash sau 3s kể từ khi text cuối xuất hiện
+        // ⏱️ Make flash clickable after 3 seconds
         setTimeout(() => {
           flashClickable = true;
+          flash.classList.add("pulse"); // Visual feedback
         }, 3000);
       }
     }, oldText.length > 0 ? 1500 : 0);
@@ -100,25 +103,25 @@ function checkBirthday() {
     day.disabled = true;
     month.disabled = true;
 
-    // 🔇 Tắt nhạc khi vào cutscene
-    if (!bgm2.paused) {
+    // 🔇 Stop other music
+    if (bgm2 && !bgm2.paused) {
       bgm2.pause();
       bgm2.currentTime = 0;
     }
 
     blackout.classList.add("show");
 
-    // 🎵 Phát nhạc
+    // 🎵 Play music
     setTimeout(() => {
       if (audioReady && canPlayMusic) {
         audio.volume = 0.4;
         audio.play().catch((e) => {
-          console.warn("Autoplay bị chặn", e);
+          console.warn("Autoplay blocked", e);
         });
       }
     }, 500);
 
-    // 🎬 Cutscene chill dài hơn
+    // 🎬 Start cutscene
     showText(texts[0], 2000);
     showText(texts[1], 8000);
     showText(texts[2], 14000);
@@ -126,25 +129,27 @@ function checkBirthday() {
     showText(texts[4], 26000);
     showText(texts[5], 32000);
     showText(texts[6], 38000);
-    showText(texts[7], 45000, true);
-    showText(texts[8], 51000);
+    showText(texts[7], 45000, true); // Show flash with this text
+    showText(texts[8], 51000); // Final text
   }
 }
 
-
+// Event listeners
 day.addEventListener("change", checkBirthday);
 month.addEventListener("change", checkBirthday);
 
-// ⭐ Flash click
+// ⭐ Flash click handler
 flash.addEventListener("click", () => {
   if (!flashClickable) return;
 
-  // Tắt nhạc
+  // Stop music
   audio.pause();
   audio.currentTime = 0;
 
+  // Zoom effect
   flash.classList.add("zoom-fullscreen");
 
+  // Redirect after animation
   setTimeout(() => {
     window.location.href = "https://www.roblox.com/games/103960960602294/Untitled-Game";
   }, 1300);
