@@ -7,14 +7,17 @@ const audio = document.getElementById("bgm");
 
 const texts = [
   "Có những thứ chưa từng gọi tên, nhưng vẫn luôn tồn tại.",
-  "Lặng lẽ ở bên, tớ chưa từng mong được ai nhận ra.",
-  "Chỉ cần một ánh nhìn, một cái gật đầu, cũng đủ ấm lòng suốt bao mùa.",
+  "Lặng lẽ ở bên, chưa từng mong được ai nhận ra.",
+  "Chỉ cần một ánh nhìn, một cái gật đầu, cũng đủ.",
   "Những ngày nắng cuối cùng rồi cũng trôi qua như cơn gió không trở lại.",
-  "Có lẽ mọi thứ sẽ dễ dàng hơn nếu tớ chưa từng để tâm quá nhiều.",
-  "Nhưng nếu được chọn lại, tớ vẫn sẽ lặng lẽ ở đó… thêm một lần nữa.",
-  "Không cần nhớ đến tớ đâu, chỉ mong cậu luôn bình yên.",
-  "Và nếu có lúc vô tình đi ngang nhau… mong cậu đừng nhận ra.",
-  "Vì tớ vẫn chưa học được cách giấu đôi mắt mình cho đủ nhẹ lòng."
+  "Có lẽ mọi thứ sẽ dễ dàng hơn nếu chưa từng để tâm quá nhiều.",
+  "Nhưng nếu được chọn lại, chắc vẫn sẽ lặng lẽ ở đó… thêm một lần nữa.",
+  "Nếu mai này bạn không còn nhớ tui là ai, thì cũng không sao.",
+  "Vì ở một góc nhỏ nào đó trong hồi ức, tui vẫn giữ lấy bạn như ban đầu.",
+  "Vì tớ vẫn chưa học được cách giấu đôi mắt mình cho đủ nhẹ lòng.",
+  "Cũng như chưa từng học cách nói lời tạm biệt cho trọn vẹn.",
+  "Tui không trách gì cả, chỉ là thấy lòng mình nhẹ đi một chút.",
+  "Và khi mọi thứ dừng lại, tui chỉ mong bạn bước tiếp, thật an yên."
 ];
 
 let triggered = false;
@@ -119,14 +122,17 @@ function checkBirthday() {
 
     // 🎬 Cutscene chill dài hơn
     showText(texts[0], 2000);
-    showText(texts[1], 8000);
-    showText(texts[2], 14000);
-    showText(texts[3], 20000);
-    showText(texts[4], 26000);
-    showText(texts[5], 32000);
-    showText(texts[6], 38000);
-    showText(texts[7], 45000, true);
-    showText(texts[8], 51000);
+showText(texts[1], 9000);
+showText(texts[2], 17000);
+showText(texts[3], 25000);
+showText(texts[4], 33000);
+showText(texts[5], 41000);
+showText(texts[6], 49000);
+showText(texts[7], 58000, true);
+showText(texts[8], 67000);
+showText(texts[9], 76000);
+showText(texts[10], 85000);
+showText(texts[11], 94000);
   }
 }
 
