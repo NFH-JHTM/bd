@@ -14,10 +14,10 @@ const texts = [
   "Nhưng nếu được chọn lại, chắc vẫn sẽ lặng lẽ ở đó… thêm một lần nữa.",
   "Nếu mai này bạn không còn nhớ tui là ai, thì cũng không sao.",
   "Vì ở một góc nhỏ nào đó trong hồi ức, tui vẫn giữ lấy bạn như ban đầu.",
-  "Vì tớ vẫn chưa học được cách giấu đôi mắt mình cho đủ nhẹ lòng.",
+  "Vì tui vẫn chưa học được cách giấu đôi mắt mình cho đủ nhẹ lòng.",
   "Cũng như chưa từng học cách nói lời tạm biệt cho trọn vẹn.",
   "Tui không trách gì cả, chỉ là thấy lòng mình nhẹ đi một chút.",
-  "Và khi mọi thứ dừng lại, tui chỉ mong bạn bước tiếp, thật an yên."
+  "Và khi mọi thứ dừng lại, tui chỉ mong bạn bước tiếp, thật hạnh phúc."
 ];
 
 let triggered = false;
