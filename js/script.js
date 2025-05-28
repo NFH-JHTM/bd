@@ -6,15 +6,15 @@ const cutsceneText = document.getElementById("cutscene-text");
 const audio = document.getElementById("bgm");
 
 const texts = [
-  "Nơi này... từng là nơi chúng ta cười đùa.",
-  "Một thời gian tưởng như chẳng bao giờ trôi qua.",
-  "Nhưng kỷ niệm... cũng có ngày tàn.",
-  "Không ai rời đi... chỉ là mọi thứ dừng lại.",
-  "Và rồi... nơi này chìm vào tĩnh lặng.",
-  "Chúng ta không thể quay lại...",
-  "Nhưng có thể giữ lại một phần nhỏ...",
-  "Một ánh sáng... của điều từng là đẹp nhất.",
-  "Hãy chạm vào nó nếu bạn muốn..."
+  "Có những thứ chưa từng gọi tên, nhưng vẫn luôn tồn tại.",
+  "Lặng lẽ ở bên, tớ chưa từng mong được ai nhận ra.",
+  "Chỉ cần một ánh nhìn, một cái gật đầu, cũng đủ ấm lòng suốt bao mùa.",
+  "Những ngày nắng cuối cùng rồi cũng trôi qua như cơn gió không trở lại.",
+  "Có lẽ mọi thứ sẽ dễ dàng hơn nếu tớ chưa từng để tâm quá nhiều.",
+  "Nhưng nếu được chọn lại, tớ vẫn sẽ lặng lẽ ở đó… thêm một lần nữa.",
+  "Không cần nhớ đến tớ đâu, chỉ mong cậu luôn bình yên.",
+  "Và nếu có lúc vô tình đi ngang nhau… mong cậu đừng nhận ra.",
+  "Vì tớ vẫn chưa học được cách giấu đôi mắt mình cho đủ nhẹ lòng."
 ];
 
 let triggered = false;
