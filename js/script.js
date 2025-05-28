@@ -88,7 +88,7 @@ function showText(content, delay, showFlash = false) {
         // ⏱️ Cho phép click flash sau 2s
         setTimeout(() => {
           flashClickable = true;
-        }, 10000);
+        }, 30000);
       }
     }, oldText.length > 0 ? 1500 : 0);
   }, delay);
